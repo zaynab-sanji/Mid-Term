@@ -326,26 +326,208 @@
         max-width: 300px;
       }
     }
+    footer {
+  background: linear-gradient(180deg, #111, #0d0d0d);
+  color: #ccc;
+  padding: 3rem 2rem 1.5rem;
+  font-size: 0.95rem;
+  border-top: 2px solid #ff4466;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-about,
+.footer-links,
+.footer-socials {
+  flex: 1 1 250px;
+}
+
+footer h3, footer h4 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+.footer-about p {
+  color: #aaa;
+  line-height: 1.6;
+}
+
+.footer-links ul {
+  list-style: none;
+}
+
+.footer-links ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links ul li a {
+  text-decoration: none;
+  color: #ccc;
+  transition: color 0.3s ease;
+}
+
+.footer-links ul li a:hover {
+  color: #ff4466;
+}
+
+.social-icons {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-icons a img {
+  width: 28px;
+  height: 28px;
+  filter: grayscale(100%) brightness(80%);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons a img:hover {
+  filter: none;
+  transform: scale(1.1);
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: #888;
+  border-top: 1px solid #222;
+  padding-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  .social-icons {
+    justify-content: center;
+  }
+}
+/* ---------- Map Section ---------- */
+.map-section {
+  background: #111;
+  color: #fff;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.map-section h2 {
+  font-size: 2rem;
+  color: #ff4466;
+  margin-bottom: 1.5rem;
+}
+
+#map {
+  width: 100%;
+  max-width: 1200px;
+  height: 400px;
+  margin: auto;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #222, #333);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #aaa;
+  font-size: 1.2rem;
+  box-shadow: 0px 8px 20px rgb(17, 17, 17);
+}
+.destination-card button{
+  background:#97243f;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+.destination-card button:hover{
+  background: #b82043;
+}
+    /* ---------- Companion Section ---------- */
+.companion-section {
+  background: #0d0d0d;
+  color: #fff;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+.companion-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #ff4466;
+}
+
+.companion-options {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.companion-options button {
+  background: #97243f;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.companion-options button:hover {
+  background: #b82043;
+  transform: translateY(-3px);
+}
+
   </style>
 </head>
 <body>
 
   <!-- Navbar -->
   <nav>
-    <div class="logo">Ride Along</div>
+    <div class="logo">StopWise</div>
     <ul>
       <li><a href="#home">Home</a></li>
       <li><a href="#about">About Us</a></li>
-      <li><a href="#privacy">Privacy Policy</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <!-- <li><a href="#privacy">Privacy Policy</a></li> -->
+      <li><a href="#contact">Feedback</a></li>
     </ul>
   </nav>
 
   <!-- Hero Section -->
   <section id="home" class="hero">
-    <h1>Ride Along</h1>
-    <p>Find Hotels, Restaurants, and Rest Stops near you — perfect for your long drives and road trips.</p>
+    <h1>StopWise</h1>
+    <p>Find safe places to rest, recharge, and continue — making every mile safer, every stop smarter.</p>
   </section>
+
+  <!-- Map Placeholder -->
+<section class="map-section">
+  <h2>Map View</h2>
+  <div id="map">
+    <!-- Placeholder text -->
+    <p>Map will be displayed here.</p>
+  </div>
+</section>
+
+  <!-- Travel Companion Section -->
+<section class="companion-section">
+  <h2>Who are you traveling with?</h2>
+  <div class="companion-options">
+    <button>Friends 👯</button>
+    <button>Family 👨‍👩‍👧‍👦</button>
+  </div>
+
 
   <!-- Destinations Section -->
   <section class="destinations">
@@ -353,16 +535,25 @@
       <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" alt="Hotel">
       <h3>Hotels</h3>
       <p>Comfortable stays nearby with top ratings and easy bookings.</p>
+      <h5>Fuel Station ⛽</h5>
+      <p>Next available stop: 15 km</p>
+      <button>View on Map</button>
     </div>
     <div id="restaurants" class="destination-card">
       <img src="jason-leung-poI7DelFiVA-unsplash.jpg" alt="Restaurant">
       <h3>Restaurants</h3>
       <p>Discover great food stops along your journey to keep you energized.</p>
+      <h5>Food Spot 🍔</h5>
+      <p>Best rated diner nearby</p>
+      <button>View on Map</button>
     </div>
     <div id="restareas" class="destination-card">
       <img src="i-nengah-dwi-putra-witarsana-nDIQ7qEejDM-unsplash.jpg" alt="Rest Stop">
       <h3>Rest Areas</h3>
       <p>Relax and recharge at nearby rest spots before hitting the road again.</p>
+      <h5>rest room 🚻</h5>
+      <p>Best rated rest room nearby</p>
+      <button>View on Map</button>
     </div>
   </section>
 
@@ -372,11 +563,11 @@
     <p>Ride Along is your trusted travel companion. Whether you’re on a long drive, road trip, or daily commute, we help you find the best hotels, restaurants, fuel stations, and rest stops nearby.</p>
   </section>
 
-  <!-- Privacy Policy -->
+  <!-- <-- Privacy Policy 
   <section id="privacy" class="info">
     <h2>Privacy Policy</h2>
     <p>Your privacy matters. Ride Along ensures that your location data is safe, secure, and never shared with third parties. We only use your information to provide you with the best travel recommendations.</p>
-  </section>
+  </section>  -->
 
   <!-- Contact -->
   <section id="contact" class="info">
@@ -398,10 +589,37 @@
     </form>
   </section>
 
-  <!-- Footer -->
+     <!-- Footer -->
   <footer>
-    &copy; 2025 Ride Along. All rights reserved.
-  </footer>
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3>Ride Along</h3>
+        <p>Your trusted travel buddy for long drives and road trips. Find the best hotels, restaurants, and rest stops nearby.</p>
+      </div>
 
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#privacy">Privacy Policy</a></li>
+          <li><a href="#contact">Feedback</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-socials">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook"></a>
+          <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733558.png" alt="Twitter"></a>
+          <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733614.png" alt="Instagram"></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Ride Along. All rights reserved.</p>
+    </div>
+  </footer>
 </body>
 </html>
