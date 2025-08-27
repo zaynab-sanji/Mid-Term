@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ride Along - Find Your Destination</title>
+  <style>
+    /* ---------- Reset ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: #0d0d0d;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    /* ---------- Navbar ---------- */
+    nav {
+      background: rgba(17, 17, 17, 0.95);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      z-index: 1000;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+    }
+
+    nav .logo {
+      font-size: 1.6rem;
+      font-weight: bold;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1rem;
+      transition: color 0.3s ease, letter-spacing 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #ff4466;
+      letter-spacing: 1px;
+    }
+
+    /* ---------- Hero Section ---------- */
+    .hero {
+      background: linear-gradient(rgba(128, 0, 32, 0.7), rgba(0,0,0,0.9)),
+                  url('https://images.unsplash.com/photo-1503736334956-4c8f8e92946d') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      padding-top: 6rem; /* offset for navbar */
+      animation: fadeIn 2s ease;
+    }
+
+    .hero h1 {
+      font-size: 6rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+    }
+
+    .hero p {
+      font-size: 5rem;
+      max-width: 2550px;
+      margin-bottom: 2rem;
+      color: #f0f0f0;
+    }
+
+    /* ---------- Category Cards ---------- */
+    .categories {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .category-card {
+      background: #fff;
+      color: #222;
+      border-radius: 16px;
+      width: 190px;
+      cursor: pointer;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0px 6px 15px rgba(0,0,0,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-decoration: none;
+      animation: fadeUp 1.2s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0px 12px 25px rgba(0,0,0,0.6);
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+    }
+
+    .category-card h4 {
+      padding: 1rem;
+      font-size: 1rem;
+      color: #800020;
+      font-weight: 600;
+    }
+
+    /* ---------- Destinations Section ---------- */
+    .destinations {
+      background: #fff;
+      color: #222;
+      padding: 5rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 3rem;
+    }
+
+    .destination-card {
+      background: #800020;
+      color: #fff;
+      border-radius: 16px;
+      padding: 2rem;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .destination-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0px 15px 30px rgba(0,0,0,0.5);
+    }
+
+    .destination-card img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 1rem;
+    }
+
+    .destination-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .destination-card p {
+      font-size: 1rem;
+      color: #f0eaea;
+    }
+
+    /* ---------- Info Sections ---------- */
+    section.info {
+      padding: 5rem 2rem;
+      text-align: center;
+      background: #0d0d0d;
+      color: #fff;
+    }
+
+    section.info h2 {
+      color: #ff4466;
+      font-size: 2.2rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: 1px;
+    }
+
+    section.info p {
+      max-width: 750px;
+      margin: auto;
+      font-size: 1.1rem;
+      color: #ddd;
+      line-height: 1.7;
+    }
+
+    /* ---------- Contact Form ---------- */
+    .contact-form {
+      margin-top: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #111;
+      padding: 2.5rem;
+      border-radius: 16px;
+      box-shadow: 0px 8px 20px rgba(0,0,0,0.4);
+      text-align: left;
+    }
+
+    .contact-form label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 0.9rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      outline: none;
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border: 2px solid #ff4466;
+      background: #222;
+    }
+
+    .contact-form textarea {
+      resize: none;
+      height: 130px;
+    }
+
+    .contact-form button {
+      background: #ff4466;
+      color: #fff;
+      border: none;
+      padding: 0.9rem 1.6rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .contact-form button:hover {
+      background: #e0003d;
+      transform: translateY(-2px);
+    }
+
+    /* ---------- Footer ---------- */
+    footer {
+      background: #111;
+      color: #aaa;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- Animations ---------- */
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
+    @keyframes fadeUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 768px) {
+      nav ul {
+        gap: 1rem;
+      }
+
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .categories {
+        gap: 1rem;
+      }
+
+      .category-card {
+        width: 150px;
+      }
+
+      .destinations {
+        padding: 3rem 1rem;
+      }
+    }
+
+    @media (max-width: 500px) {
+      nav {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .category-card {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Ride Along</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#privacy">Privacy Policy</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <h1>Ride Along</h1>
+    <p>Find Hotels, Restaurants, and Rest Stops near you — perfect for your long drives and road trips.</p>
+  </section>
+
+  <!-- Destinations Section -->
+  <section class="destinations">
+    <div id="hotels" class="destination-card">
+      <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945" alt="Hotel">
+      <h3>Hotels</h3>
+      <p>Comfortable stays nearby with top ratings and easy bookings.</p>
+    </div>
+    <div id="restaurants" class="destination-card">
+      <img src="jason-leung-poI7DelFiVA-unsplash.jpg" alt="Restaurant">
+      <h3>Restaurants</h3>
+      <p>Discover great food stops along your journey to keep you energized.</p>
+    </div>
+    <div id="restareas" class="destination-card">
+      <img src="i-nengah-dwi-putra-witarsana-nDIQ7qEejDM-unsplash.jpg" alt="Rest Stop">
+      <h3>Rest Areas</h3>
+      <p>Relax and recharge at nearby rest spots before hitting the road again.</p>
+    </div>
+  </section>
+
+  <!-- About Us -->
+  <section id="about" class="info">
+    <h2>About Us</h2>
+    <p>Ride Along is your trusted travel companion. Whether you’re on a long drive, road trip, or daily commute, we help you find the best hotels, restaurants, fuel stations, and rest stops nearby.</p>
+  </section>
+
+  <!-- Privacy Policy -->
+  <section id="privacy" class="info">
+    <h2>Privacy Policy</h2>
+    <p>Your privacy matters. Ride Along ensures that your location data is safe, secure, and never shared with third parties. We only use your information to provide you with the best travel recommendations.</p>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="info">
+    <h2>Feedback</h2>
+    <p>Have questions or feedback? Reach out to us below:</p>
+
+    <!-- Contact Form -->
+    <form class="contact-form">
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Enter your name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+
+      <label for="message">feedback</label>
+      <textarea id="message" placeholder="Write your feedback..." required></textarea>
+
+      <button type="submit">submit</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Ride Along. All rights reserved.
+  </footer>
+
+</body>
+</html>
